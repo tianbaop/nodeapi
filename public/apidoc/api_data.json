@@ -21,7 +21,7 @@
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmNlIjoid2ViIiwib3BlbkFJZCI6MTM2NywiY3JlYXRlZCI6MTUzMzg3OTM2ODA0Nywicm9sZXMiOiJVU0VSIiwiZXhwIjoxNTM0NDg0MTY4fQ.Gl5L-NpuwhjuPXFuhPax8ak5c64skjDTCBC64N_QdKQ2VT-zZeceuzXB9TqaYJuhkwNYEhrV3pUx1zhMWG7Org\",\n}",
+          "content": "{\n  \"Authorization\": \"\",\n}",
           "type": "json"
         }
       ]
@@ -349,7 +349,7 @@
       "examples": [
         {
           "title": "返回格式:",
-          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [{\n        \"id\": 0,\n        \"title\": \"\",\n        \"author\": \"\",\n        \"source\": \"\",\n        \"sourceURL\": \"\",\n        \"describes\": \"\",\n        \"content\": \"\",\n          \"browse\":  \"\"’,\n          \"classification\": \"\",\n          \"Keyword\": \"\",\n          \"img\": \"\",\n          \"datetime\": \"\",\n          \"clicks\": 2\n        },\n  ],\n  \"message\": \"成功\"\n}",
+          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [ \n     {\n               \"author\": \"未知\",\n               \"datetime\": \"2018-11-27T02:53:17.000Z\",\n               \"content\": \"别为不属于自己的观众，演绎不擅长的人生\",\n     },\n  ],\n  \"message\": \"成功\"\n}",
           "type": "json"
         }
       ]

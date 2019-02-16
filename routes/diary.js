@@ -25,28 +25,19 @@ var express = require('express');
    *  {
       *      "status": 200,
       *      "success": true,
-      *      "result": [{
-      *          "id": 0,
-      *          "title": "",
-      *          "author": "",
-      *          "source": "",
-      *          "sourceURL": "",
-      *          "describes": "",
-      *          "content": "",
-      *            "browse":  ""’,
-      *            "classification": "",
-      *            "Keyword": "",
-      *            "img": "",
-      *            "datetime": "",
-      *            "clicks": 2
-      *          },
+      *      "result": [ 
+      *       {
+                "author": "未知",
+                "datetime": "2018-11-27T02:53:17.000Z",
+                "content": "别为不属于自己的观众，演绎不擅长的人生",
+      *       },
       *    ],
       *    "message": "成功"
       *  }
    * @apiSampleRequest /diary/moodEssay
    * @apiVersion 1.1.0
    */
-  router.post("/moodEssay",multipartMiddleware,function (req, res, next) {
+  router.post("/moodEssay",function (req, res, next) {
       var allDataNun
       // 查询总共有多少条数据
       db.query("select * from diary",function(err,data){

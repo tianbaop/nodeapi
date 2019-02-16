@@ -14,14 +14,13 @@ var app = express();//生成一个express实例 app。
   app.use(cors());//不区分路劲所有接口都可以跨域
 // 跨域
 
-// view engine setup以下两行代码设置了模板文件的存储位置和使用的模板引擎：
-app.set('views', path.join(__dirname, 'views'));//设置 views 文件夹为存放视图文件的目录, 即存放模板文件的地方,__dirname 为全局变量,存储当前正在执行的脚本所在的目录。
-app.set('view engine', 'ejs');//设置视图模板引擎为 ejs。
 // app.use(favicon(__dirname + '/public/favicon.ico'))//：设置/public/favicon.ico为favicon图标。
 app.use(logger('dev'));//加载日志中间件。
+app.use(express.urlencoded({ extended: true }));//加载解析urlencoded请求体的中间件。
 app.use(express.json());//加载解析json的中间件。
-app.use(express.urlencoded({ extended: false }));//加载解析urlencoded请求体的中间件。
 app.use(cookieParser());//加载解析cookie的中间件。
+app.set('views', path.join(__dirname, 'views'));//设置 views 文件夹为存放视图文件的目录, 即存放模板文件的地方,__dirname 为全局变量,存储当前正在执行的脚本所在的目录。
+app.set('view engine', 'ejs');//设置视图模板引擎为 ejs。
 app.use(express.static(path.join(__dirname, 'public')));//设置public文件夹为存放静态文件的目录。
 
 //路由控制器

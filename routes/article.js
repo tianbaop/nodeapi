@@ -45,7 +45,7 @@ var express = require('express');
         * @apiSampleRequest http://localhost:8888/article/list
         * @apiVersion 1.0.0
     */
-    router.post('/list',multipartMiddleware, function(req, res, next) {
+    router.post('/list', function(req, res, next) {
       var allDataNun
       // 查询总共有多少条数据
         db.query("select * from article",function(err,data){
@@ -113,7 +113,7 @@ var express = require('express');
    * @apiSampleRequest /article/recommendedArticles
    * @apiVersion 1.0.0
    */
-    router.post("/recommendedArticles",multipartMiddleware,function (req, res, next) {
+    router.post("/recommendedArticles",function (req, res, next) {
       db.query("select * from article limit 0,8",function(err,data){
         if(err){
             res.send(err)
@@ -159,7 +159,7 @@ var express = require('express');
    * @apiSampleRequest /article/articleDetails
    * @apiVersion 1.1.0
    */
-  router.post("/articleDetails",multipartMiddleware,function (req, res, next) {
+  router.post("/articleDetails",function (req, res, next) {
     var id=req.body.id
     db.query(`select * from article where id= ${id}`,function(err,data){
       if(err){
@@ -192,7 +192,7 @@ var express = require('express');
     * @apiHeader {String} Authorization 用户授权token
  * @apiHeaderExample {json} Header-Example:
  *     {
- *       "Authorization": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmNlIjoid2ViIiwib3BlbkFJZCI6MTM2NywiY3JlYXRlZCI6MTUzMzg3OTM2ODA0Nywicm9sZXMiOiJVU0VSIiwiZXhwIjoxNTM0NDg0MTY4fQ.Gl5L-NpuwhjuPXFuhPax8ak5c64skjDTCBC64N_QdKQ2VT-zZeceuzXB9TqaYJuhkwNYEhrV3pUx1zhMWG7Org",
+ *       "Authorization": "",
  *     }
  *
      * @apiParam {string} title  必填
@@ -206,6 +206,7 @@ var express = require('express');
      * @apiParam {string} classification  必填
      * @apiParam {string} classificationTop  必填
      * @apiParam {string} img  必填
+     * 
      * 
      * @apiSuccess {json} result   返回的数据
      * @apiSuccessExample {json} 返回格式:
