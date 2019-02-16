@@ -1,5 +1,5 @@
 // 在接口文档的注释更改后 用命令行运行此命令执行编译apidoc -i routes/ -o public/apidoc/
-
+// 为了支持post json格式传参   http://www.itdaan.com/blog/2018/05/22/9f6730218af63b9c67e460967c514eb1.html
 
 var express = require('express');
   var router = express.Router();
@@ -50,9 +50,9 @@ var express = require('express');
       // 查询总共有多少条数据
         db.query("select * from article",function(err,data){
           if(err){
-              res.send(err)
-              res.locals.message = err.message;
-              res.status(err.status || 500);
+              res.statusCode(500)
+              res.status(500).send(db.errorSendJson())
+              
           }else {
             // console.log(req.query)//获取get参数
             // console.log(req.body)//获取post参数
@@ -68,8 +68,7 @@ var express = require('express');
             // 查询分页后的数据
             db.query(sql,function(err,data){
               if(err){
-                  res.send(err)
-                  res.locals.message = err.message;
+                  res.send(db.errorSendJson())
                   res.status(err.status || 500);
               }else {
                 res.send(db.sendJson(data))
@@ -116,8 +115,7 @@ var express = require('express');
     router.post("/recommendedArticles",function (req, res, next) {
       db.query("select * from article limit 0,8",function(err,data){
         if(err){
-            res.send(err)
-            res.locals.message = err.message;
+            res.send(db.errorSendJson())
             res.status(err.status || 500);
         }else {
           res.send(db.sendJson(data))
@@ -163,14 +161,12 @@ var express = require('express');
     var id=req.body.id
     db.query(`select * from article where id= ${id}`,function(err,data){
       if(err){
-          res.send(err)
-          res.locals.message = err.message;
+          res.send(db.errorSendJson())
           res.status(err.status || 500);
       }else {
         db.query(`update article set clicks=clicks+1 where  id='${id}' `,function(err){
           if(err){
-              res.send(err)
-              res.locals.message = err.message;
+              res.send(db.errorSendJson())
               res.status(err.status || 500);
           }else {
             res.send(db.sendJson(data))
@@ -190,11 +186,11 @@ var express = require('express');
      * @apiName addArticle
      * @apiGroup article
     * @apiHeader {String} Authorization 用户授权token
- * @apiHeaderExample {json} Header-Example:
- *     {
- *       "Authorization": "",
- *     }
- *
+    * @apiHeaderExample {json} Header-Example:
+    *     {
+    *       "Authorization": "",
+    *     }
+    *
      * @apiParam {string} title  必填
      * @apiParam {string} author  必填
      * @apiParam {string} source  必填
@@ -235,22 +231,26 @@ var express = require('express');
     * @apiVersion 1.1.0
     */
     router.post("/addArticle",multipartMiddleware,function (req, res, next) {
-      var id=req.body.id
-      db.query(`select * from article where id= ${id}`,function(err,data){
+      var title=req.body.title
+      var author=req.body.author
+      var source=req.body.source
+      var sourceURL=req.body.sourceURL
+      var describe=req.body.describe
+      var content=req.body.content
+      var html=req.body.html
+      var keyword=req.body.keyword
+      var classification=req.body.classification
+      var classificationTop=req.body.classificationTop
+      var img=req.body.img
+      console.log(req.body.title)
+      let sql=`insert into article (title,author,describes,content,html,keyword,img,classification,classificationTop,source,sourceURL)  values(${title},${author},${describe},${content},${html},${keyword},${img},${classification},${classificationTop},${source},${sourceURL});`
+      db.query(sql,function(err,data){
         if(err){
-            res.send(err)
-            res.locals.message = err.message;
+          console.log(err)
+            res.send(db.errorSendJson())
             res.status(err.status || 500);
         }else {
-          db.query(`update article set clicks=clicks+1 where  id='${id}' `,function(err){
-            if(err){
-                res.send(err)
-                res.locals.message = err.message;
-                res.status(err.status || 500);
-            }else {
-              res.send(db.sendJson(data))
-            }
-          });
+              res.send(db.sendJson())
         }
       });
     })

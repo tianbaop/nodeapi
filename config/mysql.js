@@ -22,7 +22,16 @@ let sendJson=(data=[],message="成功",success=true,status=200)=>{
         message:message,
     }
 }
+let errorSendJson=(message="操作失败",data=[],success=false,status=500)=>{
+    return {
+        status:status,
+        success:success,
+        result:data,
+        message:message,
+    }
+}
 module.exports={
     query, 
     sendJson,
+    errorSendJson,
 }

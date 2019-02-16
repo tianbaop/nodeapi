@@ -1,6 +1,6 @@
 {
-  "name": "myexpress",
-  "version": "0.0.0",
+  "name": "boke",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/index.js"
