@@ -1,6 +1,6 @@
 // 在接口文档的注释更改后 用命令行运行此命令执行编译apidoc -i routes/ -o public/apidoc/
 // 为了支持post json格式传参   http://www.itdaan.com/blog/2018/05/22/9f6730218af63b9c67e460967c514eb1.html
-
+//如果部署 package里面url 改为服务器路径 例如"url": "http://62.234.146.119:12004"
 var express = require('express');
   var router = express.Router();
 //引入mysql文件
@@ -42,7 +42,7 @@ var express = require('express');
         *    ],
         *    "message": "成功"
         *  }
-        * @apiSampleRequest http://localhost:8888/article/list
+        * @apiSampleRequest /article/list
         * @apiVersion 1.0.0
     */
     router.post('/list', function(req, res, next) {

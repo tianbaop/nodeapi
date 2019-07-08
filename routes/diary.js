@@ -1,4 +1,5 @@
-// 在接口文档的注释更改后 用命令行运行此命令执行编译apidoc -i routes/ -o public/apidoc/
+//全局安装 npm install -g apidoc
+// 然后在接口文档的注释更改后 用命令行运行此命令执行编译 apidoc -i routes/ -o public/apidoc/
 
 
 var express = require('express');

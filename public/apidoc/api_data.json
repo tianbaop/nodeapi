@@ -250,7 +250,7 @@
     },
     "sampleRequest": [
       {
-        "url": "http://localhost:8888/article/list"
+        "url": "/article/list"
       }
     ],
     "version": "1.0.0",

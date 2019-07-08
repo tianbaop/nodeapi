@@ -20,6 +20,6 @@
   },
   "apidoc": {
     "title": "博客前台接口文档",
-    "url": "http://localhost:8888"
+    "url": "localhost:12004"
   }
 }
