@@ -104,7 +104,7 @@
             "type": "string",
             "optional": false,
             "field": "img",
-            "description": "<p>必填</p>"
+            "description": "<p>非必填</p>"
           }
         ]
       }
@@ -124,7 +124,7 @@
       "examples": [
         {
           "title": "返回格式:",
-          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [{\n        \"id\": 0,\n        \"title\": \"\",\n        \"author\": \"\",\n        \"source\": \"\",\n        \"sourceURL\": \"\",\n        \"describes\": \"\",\n        \"content\": \"\",\n          \"browse\":  \"\"’,\n          \"classification\": \"\",\n          \"Keyword\": \"\",\n          \"img\": \"\",\n          \"datetime\": \"\",\n          \"clicks\": 2\n        },\n  ],\n  \"message\": \"成功\"\n}",
+          "content": "{\n \"status\": 200,\n \"success\": true,\n \"result\": [],\n \"message\": \"成功\"\n}",
           "type": "json"
         }
       ]
@@ -202,6 +202,7 @@
             "type": "string",
             "optional": false,
             "field": "page",
+            "defaultValue": "1",
             "description": "<p>第几页 必填</p>"
           },
           {
@@ -209,6 +210,7 @@
             "type": "string",
             "optional": false,
             "field": "pageSize",
+            "defaultValue": "10",
             "description": "<p>请求多少条数据 必填</p>"
           },
           {
@@ -233,10 +235,17 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "json",
+            "type": "String",
             "optional": false,
-            "field": "result",
-            "description": "<p>返回的数据</p>"
+            "field": "title",
+            "description": "<p>标题</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "author",
+            "description": "<p>作者</p>"
           }
         ]
       },
@@ -253,7 +262,7 @@
         "url": "/article/list"
       }
     ],
-    "version": "1.0.0",
+    "version": "0.0.0",
     "filename": "routes/article.js",
     "groupTitle": "article"
   },
@@ -362,5 +371,75 @@
     "version": "1.1.0",
     "filename": "routes/diary.js",
     "groupTitle": "diary"
+  },
+  {
+    "type": "get",
+    "url": "/users/users",
+    "title": "用户信息",
+    "description": "<p>通过文章的id查询到单条详情数据</p>",
+    "name": "users",
+    "group": "users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第几页 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>请求多少条数据 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>查询条件</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "classification",
+            "description": "<p>查询条件</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "result",
+            "description": "<p>返回的数据</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [ \n     {\n               \"author\": \"未知\",\n               \"datetime\": \"2018-11-27T02:53:17.000Z\",\n               \"content\": \"别为不属于自己的观众，演绎不擅长的人生\",\n     },\n  ],\n  \"message\": \"成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/users/users"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/users.js",
+    "groupTitle": "users"
   }
 ]

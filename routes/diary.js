@@ -4,10 +4,11 @@
 
 var express = require('express');
   var router = express.Router();
-//引入mysql文件
-  var db = require('../config/mysql');
-// 引入解决post参数接收
-  var multipart = require('connect-multiparty');
+  const Joi = require('joi');//数据模型校验模块  https://www.cnblogs.com/zzbo/p/5906101.html
+
+  var db = require('../config/mysql');//引入mysql文件
+
+  var multipart = require('connect-multiparty');// 引入解决post参数接收
   var multipartMiddleware = multipart();
 
   
@@ -39,37 +40,44 @@ var express = require('express');
    * @apiVersion 1.1.0
    */
   router.post("/moodEssay",function (req, res, next) {
-      var allDataNun
-      // 查询总共有多少条数据
-      db.query("select * from diary",function(err,data){
-        if(err){
-            res.send(err)
-            res.locals.message = err.message;
-            res.status(err.status || 500);
-        }else {
-          // console.log(req.query)//获取get参数
-          // console.log(req.body)//获取post参数
-          allDataNun=data.length
-          var page=(req.body.page-1)*req.body.pageSize
-          var pageSize=req.body.pageSize
-          var classification=req.body.classification
-          if (classification==""||classification==null) {
-            var sql=`select * from diary order by id desc  limit ${page},${pageSize}`
-          } else {
-            var sql=`select * from diary where classification='${classification}' limit ${page},${pageSize}`
-          }
-          // 查询分页后的数据
-          db.query(sql,function(err,data){
-            if(err){
-                res.send(err)
-                res.locals.message = err.message;
-                res.status(err.status || 500);
-            }else {
-              res.send(db.sendJson(data))
+    const schema = Joi.object().keys({
+                  pageSize: Joi.number().required(),
+                  page:Joi.number().required(),
+                  classification:Joi.string().allow(''),
+                  content:Joi.string().allow(''),
+    })
+    var output = Joi.validate(req.body, schema);
+      if (output.error) {
+          res.status(500).send(db.errorSendJson("请填写必填字段！",output.error))
+      } else {
+        var allDataNun=0
+        // 查询总共有多少条数据
+        db.query("select * from diary",function(err,data){
+          if(err){
+            res.status(500).send(db.errorSendJson(err.sqlMessage))
+          }else {
+            // console.log(req.query)//获取get参数
+            // console.log(req.body)//获取post参数
+            allDataNun=data.length
+            var page=(req.body.page-1)*req.body.pageSize
+            var pageSize=req.body.pageSize
+            var classification=req.body.classification
+            if (classification==""||classification==null) {
+              var sql=`select * from diary order by id desc  limit ${page},${pageSize}`
+            } else {
+              var sql=`select * from diary where classification='${classification}' limit ${page},${pageSize}`
             }
-          });
-        }
-      });
+            // 查询分页后的数据
+            db.query(sql,function(err,data){
+              if(err){
+                res.status(500).send(db.errorSendJson(err.sqlMessage))
+              }else {
+                res.send(db.sendJson(data))
+              }
+            });
+          }
+        });
+      }
   })
 /* 心情随笔 分页*/
 module.exports = router;

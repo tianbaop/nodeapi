@@ -1,9 +1,9 @@
 var mysql = require("mysql");
 var pool = mysql.createPool({
     host:"132.232.110.253",
-    user:"tianbaoping",
-    password:"tianbaoping",
-    database:"sqltianbaoping"
+    user:"testboke",
+    password:"testboke",
+    database:"testboke"
 });
 
 let query =(sql,callback)=>{//sql
