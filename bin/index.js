@@ -13,7 +13,6 @@ var http = require('http');//引入http模块。
  */
 //得到环境变量中设置的PORT或者手动设置PORT，然后赋予到app实例中。
 var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
 
 /**
  * Create HTTP server.
@@ -35,7 +34,6 @@ server.on('listening', onListening);
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
-
   if (isNaN(port)) {
     // named pipe
     return val;

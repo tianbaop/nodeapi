@@ -1,6 +1,6 @@
 {
   "title": "博客前台接口文档",
-  "url": "localhost:12004",
+  "url": "localhost:5000",
   "name": "boke",
   "version": "1.0.0",
   "description": "",
@@ -9,7 +9,7 @@
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2019-07-09T08:07:58.296Z",
+    "time": "2019-07-19T09:38:33.009Z",
     "url": "http://apidocjs.com",
     "version": "0.17.7"
   }
