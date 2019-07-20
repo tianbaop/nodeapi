@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 var pool = mysql.createPool({
-    host:"132.232.110.253",
+    host:"62.234.146.119",
     user:"testboke",
     password:"testboke",
     database:"testboke"
@@ -8,10 +8,19 @@ var pool = mysql.createPool({
 
 let query =(sql,callback)=>{//sql
     pool.getConnection(function(err,connection){
-        connection.query(sql, function (err,rows) {
-            callback(err,rows);
-            connection.release();
-        });
+        if (err) {
+             callback(err);
+        }else{
+            connection.query(sql, function (err,rows) {
+                try {
+                    callback(err,rows);
+                    connection.release();
+                } catch (error) {
+                    console.log(error)
+                }
+            });
+        }
+        
     });
 }
 let sendJson=(data=[],message="成功",success=true,status=200)=>{
