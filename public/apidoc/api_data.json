@@ -373,6 +373,75 @@
     "groupTitle": "diary"
   },
   {
+    "type": "post",
+    "url": "/login",
+    "title": "登录",
+    "description": "<p>登录</p>",
+    "name": "login",
+    "group": "login",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "userName",
+            "description": "<p>用户账号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "password",
+            "description": "<p>用户密码</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "result",
+            "description": "<p>返回的数据</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [ \n     {\n               \"name\": \"未知\",\n               \"datetime\": \"2018-11-27T02:53:17.000Z\",\n               \"token\": \"别为不属于自己的观众，演绎不擅长的人生\",\n     },\n  ],\n  \"message\": \"成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/login"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "routes/login.js",
+    "groupTitle": "login"
+  },
+  {
     "type": "get",
     "url": "/users/users",
     "title": "用户信息",

@@ -1,17 +1,22 @@
-var mysql = require("mysql");
+const mysql = require("mysql");
+const configurationFile = require("./configurationFile");//配置文件
 var pool = mysql.createPool({
-    host:"132.232.110.253",
-    user:"testboke",
-    password:"testboke",
-    database:"testboke"
+    host:configurationFile.database.host,
+    user:configurationFile.database.user,
+    password:configurationFile.database.password,
+    database:configurationFile.database.database,
 });
 
 let query =(sql,callback)=>{//sql
     pool.getConnection(function(err,connection){
-        connection.query(sql, function (err,rows) {
-            callback(err,rows);
-            connection.release();
-        });
+        if (err) {
+            callback(err);
+        } else {
+            connection.query(sql, function (err,rows) {
+                callback(err,rows);
+                connection.release();
+            });
+        }
     });
 }
 let sendJson=(data=[],message="成功",success=true,status=200)=>{
