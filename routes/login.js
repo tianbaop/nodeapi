@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
     })
     var output = Joi.validate(req.body, schema);
     if (output.error) {
-      res.status(500).send(db.errorSendJson("请填写必填字段！",output.error))
+      res.status(500).send(db.errorSendJson("请输入用户名或密码",output.error))
     } else {
       db.query(`SELECT * FROM boke_users where userCode='${req.body.userName}' and password='${req.body.password}'`,function(err,data){
         if(err){
