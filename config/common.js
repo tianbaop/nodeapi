@@ -2,6 +2,7 @@
 // 引入模块依赖
 const fs = require('fs');
 const path = require('path');
+var db = require('./mysql');//引入mysql文件
 const jwt = require('jsonwebtoken');//token\
 const configurationFile = require("./configurationFile");//配置文件
 
@@ -32,15 +33,20 @@ let generateToken=(userName)=>{
 */
 let checkToken=(req,res,callback)=>{
     try {
-      let token = req.headers.authorization; // 获取token
-        let secretOrPrivateKey=configurationFile.secretOrPrivateKey; // 这是加密的key（密钥
-        jwt.verify(token, secretOrPrivateKey, function (err, decode) {
-          if (err) {  //  时间失效的时候/ 伪造的token          
-            res.status(401).send(db.errorSendJson("登录信息过期，或未登录"))       
-          } else {
-            callback()
-          }
-        })
+      if (req.headers.authorization) {
+          let token = req.headers.authorization.split(' ')[1]; // 获取token
+          let secretOrPrivateKey=configurationFile.secretOrPrivateKey; // 这是加密的key（密钥
+          jwt.verify(token, secretOrPrivateKey, function (err, decode) {
+            if (err) {  //  时间失效的时候/ 伪造的token          
+              res.status(401).send(db.errorSendJson("登录信息过期，或未登录"))       
+            } else {
+              callback()
+            }
+          })
+      } else {
+         res.status(401).send(db.errorSendJson("登录信息过期，或未登录"))   
+      }
+     
     } catch (error) {
       console.log(error)
     }

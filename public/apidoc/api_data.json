@@ -3,7 +3,7 @@
     "type": "post",
     "url": "/article/addArticle",
     "title": "添加文章",
-    "description": "<p>通过文章的id查询到单条详情数据</p>",
+    "description": "<p>添加文章</p>",
     "name": "addArticle",
     "group": "article",
     "header": {
@@ -34,34 +34,34 @@
             "type": "string",
             "optional": false,
             "field": "title",
-            "description": "<p>必填</p>"
+            "description": "<p>文章标题 必填</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
             "field": "author",
-            "description": "<p>必填</p>"
+            "description": "<p>作者 必填</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
             "field": "source",
-            "description": "<p>必填</p>"
+            "description": "<p>来源</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
             "field": "sourceURL",
-            "description": "<p>必填</p>"
+            "description": "<p>来源地址</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "describe",
+            "field": "describes",
             "description": "<p>必填</p>"
           },
           {
@@ -69,42 +69,42 @@
             "type": "string",
             "optional": false,
             "field": "content",
-            "description": "<p>必填</p>"
+            "description": "<p>内容 必填</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
             "field": "html",
-            "description": "<p>必填</p>"
+            "description": "<p>内容 必填</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
             "field": "keyword",
-            "description": "<p>必填</p>"
+            "description": "<p>关键词 必填</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
             "field": "classification",
-            "description": "<p>必填</p>"
+            "description": "<p>分类 必填</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
             "field": "classificationTop",
-            "description": "<p>必填</p>"
+            "description": "<p>子分类 必填</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "img",
-            "description": "<p>非必填</p>"
+            "field": "img_url",
+            "description": "<p>图片</p>"
           }
         ]
       }
@@ -173,7 +173,7 @@
       "examples": [
         {
           "title": "返回格式:",
-          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [{\n        \"id\": 0,\n        \"title\": \"\",\n        \"author\": \"\",\n        \"source\": \"\",\n        \"sourceURL\": \"\",\n        \"describes\": \"\",\n        \"content\": \"\",\n          \"browse\":  \"\"’,\n          \"classification\": \"\",\n          \"Keyword\": \"\",\n          \"img\": \"\",\n          \"datetime\": \"\",\n          \"clicks\": 2\n        },\n  ],\n  \"message\": \"成功\"\n}",
+          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [{\n        \"id\": 0,\n        \"title\": \"\",\n        \"author\": \"\",\n        \"source\": \"\",\n        \"sourceURL\": \"\",\n        \"describes\": \"\",\n        \"content\": \"\",\n        \"browse\":  \"\"’,\n        \"classification\": \"\",\n        \"Keyword\": \"\",\n        \"img\": \"\",\n        \"datetime\": \"\",\n        \"clicks\": 2\n        },\n  ],\n  \"message\": \"成功\"\n}",
           "type": "json"
         }
       ]
@@ -181,6 +181,131 @@
     "sampleRequest": [
       {
         "url": "/article/articleDetails"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/article.js",
+    "groupTitle": "article"
+  },
+  {
+    "type": "get",
+    "url": "/article/article_add_all_number",
+    "title": "文章总数量",
+    "description": "<p>查询文章总条数</p>",
+    "name": "article_add_all_number",
+    "group": "article",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>返回的文章总数量</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": {\n        \"count\": 22\n    },\n    \"message\": \"成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/article/article_add_all_number"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/article.js",
+    "groupTitle": "article"
+  },
+  {
+    "type": "delete",
+    "url": "/article/deleteArticle",
+    "title": "删除文章",
+    "description": "<p>删除文章</p>",
+    "name": "deleteArticle",
+    "group": "article",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id 必填</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "result",
+            "description": "<p>返回的数据</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n \"status\": 200,\n \"success\": true,\n \"result\": [],\n \"message\": \"成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/article/deleteArticle"
       }
     ],
     "version": "1.1.0",
@@ -257,6 +382,19 @@
         }
       ]
     },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      }
+    },
     "sampleRequest": [
       {
         "url": "/article/list"
@@ -301,6 +439,249 @@
     "version": "1.0.0",
     "filename": "routes/article.js",
     "groupTitle": "article"
+  },
+  {
+    "type": "post",
+    "url": "/article/updateArticle",
+    "title": "修改文章",
+    "description": "<p>修改文章</p>",
+    "name": "updateArticle",
+    "group": "article",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>文章标题 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "author",
+            "description": "<p>作者 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "source",
+            "description": "<p>来源</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "sourceURL",
+            "description": "<p>来源地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "describes",
+            "description": "<p>必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>内容 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "html",
+            "description": "<p>内容 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "keyword",
+            "description": "<p>关键词 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "classification",
+            "description": "<p>分类 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "classificationTop",
+            "description": "<p>子分类 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "img_url",
+            "description": "<p>图片</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "result",
+            "description": "<p>返回的数据</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n \"status\": 200,\n \"success\": true,\n \"result\": [],\n \"message\": \"成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/article/updateArticle"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/article.js",
+    "groupTitle": "article"
+  },
+  {
+    "type": "get",
+    "url": "/basicData/classifications_list",
+    "title": "一级分类查询",
+    "description": "<p>一级分类查询</p>",
+    "name": "classifications_list",
+    "group": "basicData",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>必填如果是一级就传0其他的填上一级的id</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "classification",
+            "description": "<p>分类名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "datetime",
+            "optional": false,
+            "field": "datetime",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "parent_int",
+            "description": "<p>父级id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "datetime",
+            "optional": false,
+            "field": "createTime",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "createCode",
+            "description": "<p>创建人</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n         \"status\": 200,\n         \"success\": true,\n         \"result\": [\n             {\n                 \"id\": 16,\n                 \"classification\": \"心情\",\n                 \"datetime\": \"2018-08-05T14:00:00.000Z\",\n                 \"parent_int\": 15,\n                 \"createTime\": null,\n                 \"createCode\": null\n             }\n         ],\n         \"message\": \"成功\"\n     }",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/basicData/classifications_list"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/basicData.js",
+    "groupTitle": "basicData"
   },
   {
     "type": "post",
@@ -386,7 +767,7 @@
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "userName",
+            "field": "userCode",
             "description": "<p>用户账号</p>"
           },
           {
@@ -404,21 +785,72 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "json",
+            "type": "datetime",
             "optional": false,
-            "field": "result",
-            "description": "<p>返回的数据</p>"
+            "field": "datetime",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "img",
+            "description": "<p>头像图片路径</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "usergroup",
+            "description": "<p>账号级别</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "token",
+            "description": "<p>登录验证token</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "返回格式:",
-          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [ \n     {\n               \"name\": \"未知\",\n               \"datetime\": \"2018-11-27T02:53:17.000Z\",\n               \"token\": \"别为不属于自己的观众，演绎不擅长的人生\",\n     },\n  ],\n  \"message\": \"成功\"\n}",
+          "content": "{\n          \"status\": 200,\n          \"success\": true,\n          \"result\": {\n              \"datetime\": \"2019-05-16T07:29:59.000Z\",\n              \"id\": 1,\n              \"img\": \"/uploadImg/user_img/154563224052635.jpg\",\n              \"usergroup\": \"超级管理员\",\n              \"username\": \"田保平\",\n              \"token\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi55Sw5L-d5bmzIiwiaWF0IjoxNTY0NDU2NDc2LCJleHAiOjE1NjQ0OTI0NzZ9.vyqFuZrDeOgPftnLJ-V6RfAkIAtVRkfzo3FIaY2EtvE\"\n          },\n          \"message\": \"成功\"\n      }",
           "type": "json"
         }
       ]
     },
+    "sampleRequest": [
+      {
+        "url": "/login"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "routes/login.js",
+    "groupTitle": "login"
+  },
+  {
+    "type": "get",
+    "url": "/users/user_pearson_all",
+    "title": "用户总数量",
+    "description": "<p>11111</p>",
+    "name": "user_pearson_all",
+    "group": "users",
     "header": {
       "fields": {
         "Header": [
@@ -432,14 +864,34 @@
         ]
       }
     },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>返回的用户数量</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n         \"status\": 200,\n         \"success\": true,\n         \"result\": {\n             \"count\": 2\n         },\n         \"message\": \"成功\"\n     }",
+          "type": "json"
+        }
+      ]
+    },
     "sampleRequest": [
       {
-        "url": "/login"
+        "url": "/users/user_pearson_all"
       }
     ],
-    "version": "1.0.0",
-    "filename": "routes/login.js",
-    "groupTitle": "login"
+    "version": "1.1.0",
+    "filename": "routes/users.js",
+    "groupTitle": "users"
   },
   {
     "type": "get",
@@ -478,6 +930,19 @@
             "optional": false,
             "field": "classification",
             "description": "<p>查询条件</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
           }
         ]
       }

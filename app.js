@@ -19,14 +19,16 @@ app.set('view engine', 'ejs');//设置视图模板引擎为 ejs。
 app.use(express.static(path.join(__dirname, 'public')));//设置public文件夹为存放静态文件的目录。
 
 //路由控制器
-const indexRouter = require('./routes/article');
-const diaryRouter = require('./routes/diary');
-const usersRouter = require('./routes/users');
-const loginRouter = require('./routes/login');
+const indexRouter = require('./routes/article');//文章
+const diaryRouter = require('./routes/diary');//随笔
+const usersRouter = require('./routes/users');//用户设置
+const loginRouter = require('./routes/login');//登录
+const basicDataRouter = require('./routes/basicData');//基础数据查询
 app.use('/article', indexRouter);
 app.use('/users', usersRouter);
 app.use('/diary', diaryRouter);
 app.use('/login', loginRouter);
+app.use('/basicData', basicDataRouter);
 //路由控制器
 
 // 日志捕获不了接口抛出的异常
