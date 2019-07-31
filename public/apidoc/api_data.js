@@ -589,8 +589,8 @@ define({ "api": [
   {
     "type": "get",
     "url": "/basicData/classifications_list",
-    "title": "一级分类查询",
-    "description": "<p>一级分类查询</p>",
+    "title": "分类查询",
+    "description": "<p>分类查询</p>",
     "name": "classifications_list",
     "group": "basicData",
     "parameter": {
@@ -669,7 +669,7 @@ define({ "api": [
       "examples": [
         {
           "title": "返回格式:",
-          "content": "{\n         \"status\": 200,\n         \"success\": true,\n         \"result\": [\n             {\n                 \"id\": 16,\n                 \"classification\": \"心情\",\n                 \"datetime\": \"2018-08-05T14:00:00.000Z\",\n                 \"parent_int\": 15,\n                 \"createTime\": null,\n                 \"createCode\": null\n             }\n         ],\n         \"message\": \"成功\"\n     }",
+          "content": "{\n         \"status\": 200,\n         \"success\": true,\n         \"result\": [\n             {\n                 \"id\": 16,\n                 \"classification\": \"\",\n                 \"datetime\": \"2018-08-05T14:00:00.000Z\",\n                 \"parent_int\": 15,\n                 \"createTime\": null,\n                 \"createCode\": null\n             }\n         ],\n         \"message\": \"成功\"\n     }",
           "type": "json"
         }
       ]
@@ -685,8 +685,160 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/diary/addEssay",
+    "title": "心情随笔 新增",
+    "description": "<p>新增心情随笔</p>",
+    "name": "addEssay",
+    "group": "diary",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "author",
+            "description": "<p>作者</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>内容 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "boolean",
+            "optional": false,
+            "field": "isEnabled",
+            "description": "<p>是否启用 必填</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "result",
+            "description": "<p>返回的数据</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [ \n     {\n                 \"author\": \"未知\",\n                 \"datetime\": \"2018-11-27T02:53:17.000Z\",\n                 \"content\": \"别为不属于自己的观众，演绎不擅长的人生\",\n     },\n  ],\n  \"message\": \"成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/diary/addEssay"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/diary.js",
+    "groupTitle": "diary"
+  },
+  {
+    "type": "delete",
+    "url": "/diary/deletediary",
+    "title": "心情随笔删除",
+    "description": "<p>删除心情随笔</p>",
+    "name": "deletediary",
+    "group": "diary",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id 必填</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "result",
+            "description": "<p>返回的数据</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n \"status\": 200,\n \"success\": true,\n \"result\": [],\n \"message\": \"成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/diary/deletediary"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/diary.js",
+    "groupTitle": "diary"
+  },
+  {
+    "type": "post",
     "url": "/diary/moodEssay",
-    "title": "心情随笔 分页",
+    "title": "心情随笔 查询分页",
     "description": "<p>通过文章的id查询到单条详情数据</p>",
     "name": "diary",
     "group": "diary",
@@ -739,7 +891,7 @@ define({ "api": [
       "examples": [
         {
           "title": "返回格式:",
-          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [ \n     {\n               \"author\": \"未知\",\n               \"datetime\": \"2018-11-27T02:53:17.000Z\",\n               \"content\": \"别为不属于自己的观众，演绎不擅长的人生\",\n     },\n  ],\n  \"message\": \"成功\"\n}",
+          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [ \n     {\n                 \"author\": \"未知\",\n                 \"datetime\": \"2018-11-27T02:53:17.000Z\",\n                 \"content\": \"别为不属于自己的观众，演绎不擅长的人生\",\n     },\n  ],\n  \"message\": \"成功\"\n}",
           "type": "json"
         }
       ]
@@ -845,11 +997,11 @@ define({ "api": [
     "groupTitle": "login"
   },
   {
-    "type": "get",
-    "url": "/users/user_pearson_all",
-    "title": "用户总数量",
-    "description": "<p>11111</p>",
-    "name": "user_pearson_all",
+    "type": "post",
+    "url": "/users/addusers",
+    "title": "用户 新增",
+    "description": "<p>用户 新增</p>",
+    "name": "addusers",
     "group": "users",
     "header": {
       "fields": {
@@ -862,6 +1014,54 @@ define({ "api": [
             "description": "<p>用户授权token</p>"
           }
         ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "img",
+            "description": "<p>头像</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "password",
+            "description": "<p>密码 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "userCode",
+            "description": "<p>账号 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "usergroup",
+            "description": "<p>用户级别 必填</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "username",
+            "description": "<p>用户名 必填</p>"
+          }
+        ]
       }
     },
     "success": {
@@ -869,24 +1069,24 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "number",
+            "type": "json",
             "optional": false,
-            "field": "count",
-            "description": "<p>返回的用户数量</p>"
+            "field": "result",
+            "description": "<p>返回的数据</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "返回格式:",
-          "content": "{\n         \"status\": 200,\n         \"success\": true,\n         \"result\": {\n             \"count\": 2\n         },\n         \"message\": \"成功\"\n     }",
+          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [ \n     {\n               \"author\": \"未知\",\n               \"datetime\": \"2018-11-27T02:53:17.000Z\",\n               \"content\": \"别为不属于自己的观众，演绎不擅长的人生\",\n     },\n  ],\n  \"message\": \"成功\"\n}",
           "type": "json"
         }
       ]
     },
     "sampleRequest": [
       {
-        "url": "/users/user_pearson_all"
+        "url": "/users/addusers"
       }
     ],
     "version": "1.1.0",
@@ -894,11 +1094,80 @@ define({ "api": [
     "groupTitle": "users"
   },
   {
-    "type": "get",
-    "url": "/users/users",
-    "title": "用户信息",
+    "type": "delete",
+    "url": "/users/deleteusers",
+    "title": "删除用户",
+    "description": "<p>删除用户</p>",
+    "name": "deleteusers",
+    "group": "users",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id 必填</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "result",
+            "description": "<p>返回的数据</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n \"status\": 200,\n \"success\": true,\n \"result\": [],\n \"message\": \"成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/users/deleteusers"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/users.js",
+    "groupTitle": "users"
+  },
+  {
+    "type": "post",
+    "url": "/users/list",
+    "title": "用户信息 分页",
     "description": "<p>通过文章的id查询到单条详情数据</p>",
-    "name": "users",
+    "name": "list",
     "group": "users",
     "parameter": {
       "fields": {
@@ -969,7 +1238,105 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "/users/users"
+        "url": "/users/list"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/users.js",
+    "groupTitle": "users"
+  },
+  {
+    "type": "post",
+    "url": "/users/user_code",
+    "title": "查询账号是否可注册",
+    "description": "<p>查询账号是否可注册</p>",
+    "name": "user_code",
+    "group": "users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "userCode",
+            "description": "<p>账号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isregister",
+            "description": "<p>true为可注册false不可注册</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n         \"status\": 200,\n         \"success\": true,\n         \"result\": {\n             \"count\": 2\n         },\n         \"message\": \"成功\"\n     }",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/users/user_code"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/users.js",
+    "groupTitle": "users"
+  },
+  {
+    "type": "get",
+    "url": "/users/user_pearson_all",
+    "title": "用户总数量",
+    "description": "<p>11111</p>",
+    "name": "user_pearson_all",
+    "group": "users",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>返回的用户数量</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n         \"status\": 200,\n         \"success\": true,\n         \"result\": {\n             \"count\": 2\n         },\n         \"message\": \"成功\"\n     }",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/users/user_pearson_all"
       }
     ],
     "version": "1.1.0",

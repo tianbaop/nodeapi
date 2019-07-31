@@ -58,7 +58,7 @@ router.post('/',multipartMiddleware, function(req, res, next) {
         }else {
             console.log(data)
           if (data.length>0) {
-            let token=common.generateToken(data[0].username)//获取token
+            let token=common.generateToken({username:data[0].username,userCode:data[0].userCode,usergroup:data[0].usergroup})//获取token
             let datas={
               datetime:data[0].datetime,
               id:data[0].id,
@@ -67,7 +67,7 @@ router.post('/',multipartMiddleware, function(req, res, next) {
               username:data[0].username,
               token:"Bearer "+token
             }
-            
+            db.query(`update boke_users set datetime='${common.GetDateStr(new Date())}' where id=${data[0].id}`);
             res.send(db.sendJson(datas))
           } else {
             res.status(500).send(db.errorSendJson("账号或者密码错误"))

@@ -8,8 +8,8 @@ var multipartMiddleware = multipart();//如果全局获取post参数设置没生
 //  一级分类查询 
  {
    /**
-   * @api {get} /basicData/classifications_list  一级分类查询
-   * @apiDescription  一级分类查询
+   * @api {get} /basicData/classifications_list  分类查询
+   * @apiDescription  分类查询
    * @apiName classifications_list
    * @apiGroup basicData
    * @apiParam {int} id  必填如果是一级就传0其他的填上一级的id
@@ -27,7 +27,7 @@ var multipartMiddleware = multipart();//如果全局获取post参数设置没生
             "result": [
                 {
                     "id": 16,
-                    "classification": "心情",
+                    "classification": "",
                     "datetime": "2018-08-05T14:00:00.000Z",
                     "parent_int": 15,
                     "createTime": null,

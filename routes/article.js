@@ -246,14 +246,18 @@ var express = require('express');
           keyword:Joi.string().required(),
           classification: Joi.string().required(),
           classificationTop: Joi.string().required(),
-          img_url: Joi.string()
+          img_url: Joi.string().allow('')
         })
         // 字段模型校验
         var output = Joi.validate(req.body, schema);
         if (output.error) {
           res.status(500).send(db.errorSendJson("请填写必填字段！",output.error))
         } else {
-          let sql=`insert into article (title,author,describes,content,html,keyword,img,classification,classificationTop,source,sourceURL)  values('${req.body.title}','${req.body.author}','${req.body.describe}','${req.body.content}','${req.body.html}','${req.body.keyword}','${req.body.img}','${req.body.classification}','${req.body.classificationTop}','${req.body.source}','${req.body.sourceURL}');`
+          let analysisToken=common.analysisToken(req)
+          let sql=`insert into article (title,author,describes,content,html,keyword,img,classification,classificationTop,source,sourceURL,datetime,createCode,createTime)  values(
+            '${req.body.title}','${req.body.author}','${req.body.describes}','${req.body.content}','${req.body.html}','${req.body.keyword}','${req.body.img_url}',
+            '${req.body.classification}','${req.body.classificationTop}','${req.body.source}','${req.body.sourceURL}','${common.GetDateStr(new Date())}','${analysisToken.userCode}',
+            '${common.GetDateStr(new Date())}');`
           db.query(sql,function(err,data){
             if(err){
               res.status(500).send(db.errorSendJson(err.sqlMessage))
@@ -319,7 +323,7 @@ var express = require('express');
         keyword:Joi.string().required(),
         classification: Joi.string().required(),
         classificationTop: Joi.string().required(),
-        img_url: Joi.string()
+        img_url: Joi.string().required(),
       })
       // 字段模型校验
       var output = Joi.validate(req.body, schema);
@@ -327,8 +331,9 @@ var express = require('express');
         res.status(500).send(db.errorSendJson("请填写必填字段！",output.error))
       } else {
        
-         let sql=`update article set title='${req.body.title}',author='${req.body.author}',describes='${req.body.describes}',content='${req.body.content}',html='${req.body.html}',keyword='${req.body.keyword}',img='${req.body.img}',classification='${req.body.classification}',classificationTop='${req.body.classificationTop}',source='${req.body.source}',sourceURL='${req.body.sourceURL}' where id=${req.body.id}`
-         console.log(sql)
+         let sql=`update article set title='${req.body.title}',author='${req.body.author}',describes='${req.body.describes}',content='${req.body.content}',
+                  html='${req.body.html}',keyword='${req.body.keyword}',img='${req.body.img_url}',classification='${req.body.classification}',classificationTop='${req.body.classificationTop}',
+                  source='${req.body.source}',sourceURL='${req.body.sourceURL}' where id=${req.body.id}`
         db.query(sql,function(err,data){
           if(err){
             res.status(500).send(db.errorSendJson(err.sqlMessage))

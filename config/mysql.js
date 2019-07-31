@@ -10,10 +10,16 @@ var pool = mysql.createPool({
 let query =(sql,callback)=>{//sql
     pool.getConnection(function(err,connection){
         if (err) {
-            callback(err);
+            if (typeof(callback)=="function") {
+                 callback(err);
+            }
+           
         } else {
             connection.query(sql, function (err,rows) {
-                callback(err,rows);
+               
+                if (typeof(callback)=="function") {
+                    callback(err,rows);
+                }
                 connection.release();
             });
         }
