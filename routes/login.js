@@ -1,3 +1,8 @@
+// 在接口文档的注释更改后 用命令行运行此命令执行编译apidoc -i routes/ -o public/apidoc/
+// 为了支持post json格式传参   http://www.itdaan.com/blog/2018/05/22/9f6730218af63b9c67e460967c514eb1.html
+//如果部署 package里面url 改为服务器路径 例如"url": "http://62.234.146.119:12005"
+
+
 var express = require('express');
 var router = express.Router();
 var db = require('../config/mysql');//引入mysql文件
@@ -37,7 +42,6 @@ var multipartMiddleware = multipart();
    * @apiVersion 1.0.0
    */
 router.post('/',multipartMiddleware, function(req, res, next) {
-  console.log(req.body)
     // 必填校验模型
       const schema = Joi.object().keys({
         userCode: Joi.string().required(),
@@ -49,28 +53,36 @@ router.post('/',multipartMiddleware, function(req, res, next) {
     // 必填校验
     if (output.error) {
       // 校验不通过
-      res.status(500).send(db.errorSendJson("请输入用户名或密码",output.error))
+      next(db.errorSendJson("请输入用户名或密码"))
     } else {
       // 检验通过
-      db.query(`SELECT * FROM boke_users where userCode='${req.body.userCode}' and password='${req.body.password}'`,function(err,data){
+      db.query(`SELECT * FROM cms_admin_user where userCode='${req.body.userCode}' and password='${req.body.password}'`,function(err,data){
         if(err){
-          res.status(500).send(db.errorSendJson(err))
+          next(db.errorSendJson(err.message))
         }else {
-            console.log(data)
           if (data.length>0) {
-            let token=common.generateToken({username:data[0].username,userCode:data[0].userCode,usergroup:data[0].usergroup})//获取token
-            let datas={
-              datetime:data[0].datetime,
-              id:data[0].id,
-              img:data[0].img,
-              usergroup:data[0].usergroup,
-              username:data[0].username,
-              token:"Bearer "+token
+            if (data[0].locked==0) {//状态正常
+              let token=common.generateToken({username:data[0].username,userCode:data[0].userCode,permissionType:data[0].permissionType})//获取token
+              let datas={
+                username:data[0].username,
+                usercode:data[0].usercode,
+                avatar:data[0].avatar,
+                phone:data[0].phone,
+                email:data[0].email,
+                sex:data[0].sex,
+                locked:data[0].locked,
+                datetime:data[0].datetime,
+                id:data[0].id,
+                permissionType:data[0].permissionType,
+                token:"Bearer "+token
+              }
+              db.query(`update boke_users set datetime='${common.GetDateStr(new Date())}' where id=${data[0].id}`);
+              res.send(db.sendJson(datas))
+            } else {
+              next(db.errorSendJson("当前账号已被停用！"))
             }
-            db.query(`update boke_users set datetime='${common.GetDateStr(new Date())}' where id=${data[0].id}`);
-            res.send(db.sendJson(datas))
           } else {
-            res.status(500).send(db.errorSendJson("账号或者密码错误"))
+            next(db.errorSendJson("账号或者密码错误"))
           }
         }
       });

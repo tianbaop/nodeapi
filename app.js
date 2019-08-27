@@ -48,16 +48,14 @@ app.all("*",(req,res,next)=>{
   next();
 })
 //路由控制器
-const indexRouter = require('./routes/article');//文章
-const diaryRouter = require('./routes/diary');//随笔
-const usersRouter = require('./routes/users');//用户设置
+const usersRouter = require('./routes/userAccount/users');//用户设置
 const loginRouter = require('./routes/login');//登录
-const basicDataRouter = require('./routes/basicData');//基础数据查询
-app.use('/article', indexRouter);
+const menuManagementRouter = require('./routes/systemManagement/menuManagement');//基础数据查询
+const basicDataRouter = require('./routes/basicData/basicData');//基础数据查询
 app.use('/users', usersRouter);
-app.use('/diary', diaryRouter);
 app.use('/login', loginRouter);
 app.use('/basicData', basicDataRouter);
+app.use('/menuManagement', menuManagementRouter);
 //路由控制器
 
 
@@ -74,4 +72,4 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send(err);
 });
-module.exports = app.listen(12004);
+module.exports = app.listen(12005);

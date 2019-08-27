@@ -25,20 +25,20 @@ let query =(sql,callback)=>{//sql
         }
     });
 }
-let sendJson=(data=[],message="成功",success=true,status=200)=>{
+let sendJson=(data=[],message="成功",status=200)=>{
     return {
-        status:status,
-        success:success,
         result:data,
         message:message,
+        status:status,
+        success:true,
     }
 }
-let errorSendJson=(message="操作失败",data=[],success=false,status=500)=>{
+let errorSendJson=(message="操作失败",status=500)=>{
     return {
-        status:status,
-        success:success,
-        result:data,
+        result:null,
         message:message,
+        status:status,
+        success:false,
     }
 }
 module.exports={

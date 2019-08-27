@@ -16,7 +16,7 @@ const configurationFile = require("./configurationFile");//配置文件
 let generateToken=(data)=>{
   try {
     let created = Math.floor(Date.now() / 1000);
-    let content ={username:data.username,userCode:data.userCode,usergroup:data.usergroup,}; // 要生成token的主体信息
+    let content ={username:data.username,userCode:data.userCode,permissionType:data.permissionType,}; // 要生成token的主体信息
     let secretOrPrivateKey=configurationFile.secretOrPrivateKey // 这是加密的key（密钥） 
     let tokens = jwt.sign(content, secretOrPrivateKey, {
             expiresIn: 60*60*10 , // 10小时过期
@@ -68,7 +68,7 @@ let checkToken=(req,res,callback)=>{
     }
 }
 /*
-解析token 是否有效
+解析token 取出token里面的信息
 参数： req:路由req的值
 */
 function analysisToken(req){

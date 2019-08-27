@@ -2,9 +2,9 @@
     // mysql数据库连接配置
     const database ={
         host:"62.234.146.119",//服务器地址
-        user:"testboke",//数据库名
-        password:"testboke",//用户
-        database:"testboke"//密码
+        user:"tianbp",//用户
+        password:"tianbp",//密码
+        database:"cmsdatabase"//数据库名
     };
     // token加密的key
     const secretOrPrivateKey="tianbaoping"

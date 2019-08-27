@@ -1,592 +1,5 @@
 [
   {
-    "type": "post",
-    "url": "/article/addArticle",
-    "title": "添加文章",
-    "description": "<p>添加文章</p>",
-    "name": "addArticle",
-    "group": "article",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>用户授权token</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"\",\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "title",
-            "description": "<p>文章标题 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "author",
-            "description": "<p>作者 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "source",
-            "description": "<p>来源</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "sourceURL",
-            "description": "<p>来源地址</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "describes",
-            "description": "<p>必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "content",
-            "description": "<p>内容 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "html",
-            "description": "<p>内容 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "keyword",
-            "description": "<p>关键词 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "classification",
-            "description": "<p>分类 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "classificationTop",
-            "description": "<p>子分类 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "img_url",
-            "description": "<p>图片</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "json",
-            "optional": false,
-            "field": "result",
-            "description": "<p>返回的数据</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "返回格式:",
-          "content": "{\n \"status\": 200,\n \"success\": true,\n \"result\": [],\n \"message\": \"成功\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "sampleRequest": [
-      {
-        "url": "/article/addArticle"
-      }
-    ],
-    "version": "1.1.0",
-    "filename": "routes/article.js",
-    "groupTitle": "article"
-  },
-  {
-    "type": "post",
-    "url": "/article/articleDetails",
-    "title": "文章查询  文章详情",
-    "description": "<p>通过文章的id查询到单条详情数据</p>",
-    "name": "articleDetails",
-    "group": "article",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "optional": false,
-            "field": "id",
-            "defaultValue": "1",
-            "description": "<p>必填</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "json",
-            "optional": false,
-            "field": "result",
-            "description": "<p>返回的数据</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "返回格式:",
-          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [{\n        \"id\": 0,\n        \"title\": \"\",\n        \"author\": \"\",\n        \"source\": \"\",\n        \"sourceURL\": \"\",\n        \"describes\": \"\",\n        \"content\": \"\",\n        \"browse\":  \"\"’,\n        \"classification\": \"\",\n        \"Keyword\": \"\",\n        \"img\": \"\",\n        \"datetime\": \"\",\n        \"clicks\": 2\n        },\n  ],\n  \"message\": \"成功\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "sampleRequest": [
-      {
-        "url": "/article/articleDetails"
-      }
-    ],
-    "version": "1.1.0",
-    "filename": "routes/article.js",
-    "groupTitle": "article"
-  },
-  {
-    "type": "get",
-    "url": "/article/article_add_all_number",
-    "title": "文章总数量",
-    "description": "<p>查询文章总条数</p>",
-    "name": "article_add_all_number",
-    "group": "article",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>用户授权token</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"\",\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "number",
-            "optional": false,
-            "field": "count",
-            "description": "<p>返回的文章总数量</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "返回格式:",
-          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": {\n        \"count\": 22\n    },\n    \"message\": \"成功\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "sampleRequest": [
-      {
-        "url": "/article/article_add_all_number"
-      }
-    ],
-    "version": "1.1.0",
-    "filename": "routes/article.js",
-    "groupTitle": "article"
-  },
-  {
-    "type": "delete",
-    "url": "/article/deleteArticle",
-    "title": "删除文章",
-    "description": "<p>删除文章</p>",
-    "name": "deleteArticle",
-    "group": "article",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>用户授权token</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"\",\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>id 必填</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "json",
-            "optional": false,
-            "field": "result",
-            "description": "<p>返回的数据</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "返回格式:",
-          "content": "{\n \"status\": 200,\n \"success\": true,\n \"result\": [],\n \"message\": \"成功\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "sampleRequest": [
-      {
-        "url": "/article/deleteArticle"
-      }
-    ],
-    "version": "1.1.0",
-    "filename": "routes/article.js",
-    "groupTitle": "article"
-  },
-  {
-    "type": "post",
-    "url": "/article/list",
-    "title": "文章查询 分页",
-    "description": "<p>分页查询文章， 选传其他条件查询</p>",
-    "name": "list",
-    "group": "article",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "page",
-            "defaultValue": "1",
-            "description": "<p>第几页 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "pageSize",
-            "defaultValue": "10",
-            "description": "<p>请求多少条数据 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "content",
-            "description": "<p>查询条件</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "classification",
-            "description": "<p>查询条件</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>标题</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "author",
-            "description": "<p>作者</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "返回格式:",
-          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [{\n        \"id\": 0,\n        \"title\": \"\",\n        \"author\": \"\",\n        \"source\": \"\",\n        \"sourceURL\": \"\",\n        \"describes\": \"\",\n        \"content\": \"\",\n          \"browse\":  \"\"’,\n          \"classification\": \"\",\n          \"Keyword\": \"\",\n          \"img\": \"\",\n          \"datetime\": \"\",\n          \"clicks\": 2\n        },\n  ],\n  \"message\": \"成功\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>用户授权token</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/article/list"
-      }
-    ],
-    "version": "0.0.0",
-    "filename": "routes/article.js",
-    "groupTitle": "article"
-  },
-  {
-    "type": "post",
-    "url": "/article/recommendedArticles",
-    "title": "文章查询  推荐列表",
-    "description": "<p>推荐的文章数据查询，默认推荐的数据为8条</p>",
-    "name": "recommendedArticles1111",
-    "group": "article",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "json",
-            "optional": false,
-            "field": "result",
-            "description": "<p>返回的数据</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "返回格式:",
-          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [{\n        \"id\": 0,\n        \"title\": \"\",\n        \"author\": \"\",\n        \"source\": \"\",\n        \"sourceURL\": \"\",\n        \"describes\": \"\",\n        \"content\": \"\",\n          \"browse\":  \"\"’,\n          \"classification\": \"\",\n          \"Keyword\": \"\",\n          \"img\": \"\",\n          \"datetime\": \"\",\n          \"clicks\": 2\n        },\n  ],\n  \"message\": \"成功\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "sampleRequest": [
-      {
-        "url": "/article/recommendedArticles"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "routes/article.js",
-    "groupTitle": "article"
-  },
-  {
-    "type": "post",
-    "url": "/article/updateArticle",
-    "title": "修改文章",
-    "description": "<p>修改文章</p>",
-    "name": "updateArticle",
-    "group": "article",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>用户授权token</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"\",\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>id 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "title",
-            "description": "<p>文章标题 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "author",
-            "description": "<p>作者 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "source",
-            "description": "<p>来源</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "sourceURL",
-            "description": "<p>来源地址</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "describes",
-            "description": "<p>必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "content",
-            "description": "<p>内容 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "html",
-            "description": "<p>内容 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "keyword",
-            "description": "<p>关键词 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "classification",
-            "description": "<p>分类 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "classificationTop",
-            "description": "<p>子分类 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "img_url",
-            "description": "<p>图片</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "json",
-            "optional": false,
-            "field": "result",
-            "description": "<p>返回的数据</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "返回格式:",
-          "content": "{\n \"status\": 200,\n \"success\": true,\n \"result\": [],\n \"message\": \"成功\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "sampleRequest": [
-      {
-        "url": "/article/updateArticle"
-      }
-    ],
-    "version": "1.1.0",
-    "filename": "routes/article.js",
-    "groupTitle": "article"
-  },
-  {
     "type": "get",
     "url": "/basicData/classifications_list",
     "title": "分类查询",
@@ -680,230 +93,8 @@
       }
     ],
     "version": "1.1.0",
-    "filename": "routes/basicData.js",
+    "filename": "routes/basicData/basicData.js",
     "groupTitle": "basicData"
-  },
-  {
-    "type": "post",
-    "url": "/diary/addEssay",
-    "title": "心情随笔 新增",
-    "description": "<p>新增心情随笔</p>",
-    "name": "addEssay",
-    "group": "diary",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>用户授权token</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"\",\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "author",
-            "description": "<p>作者</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "content",
-            "description": "<p>内容 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "boolean",
-            "optional": false,
-            "field": "isEnabled",
-            "description": "<p>是否启用 必填</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "json",
-            "optional": false,
-            "field": "result",
-            "description": "<p>返回的数据</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "返回格式:",
-          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [ \n     {\n                 \"author\": \"未知\",\n                 \"datetime\": \"2018-11-27T02:53:17.000Z\",\n                 \"content\": \"别为不属于自己的观众，演绎不擅长的人生\",\n     },\n  ],\n  \"message\": \"成功\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "sampleRequest": [
-      {
-        "url": "/diary/addEssay"
-      }
-    ],
-    "version": "1.1.0",
-    "filename": "routes/diary.js",
-    "groupTitle": "diary"
-  },
-  {
-    "type": "delete",
-    "url": "/diary/deletediary",
-    "title": "心情随笔删除",
-    "description": "<p>删除心情随笔</p>",
-    "name": "deletediary",
-    "group": "diary",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>用户授权token</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"\",\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>id 必填</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "json",
-            "optional": false,
-            "field": "result",
-            "description": "<p>返回的数据</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "返回格式:",
-          "content": "{\n \"status\": 200,\n \"success\": true,\n \"result\": [],\n \"message\": \"成功\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "sampleRequest": [
-      {
-        "url": "/diary/deletediary"
-      }
-    ],
-    "version": "1.1.0",
-    "filename": "routes/diary.js",
-    "groupTitle": "diary"
-  },
-  {
-    "type": "post",
-    "url": "/diary/moodEssay",
-    "title": "心情随笔 查询分页",
-    "description": "<p>通过文章的id查询到单条详情数据</p>",
-    "name": "diary",
-    "group": "diary",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "page",
-            "description": "<p>第几页 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "pageSize",
-            "description": "<p>请求多少条数据 必填</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "content",
-            "description": "<p>查询条件</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "classification",
-            "description": "<p>查询条件</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "json",
-            "optional": false,
-            "field": "result",
-            "description": "<p>返回的数据</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "返回格式:",
-          "content": "{\n    \"status\": 200,\n    \"success\": true,\n    \"result\": [ \n     {\n                 \"author\": \"未知\",\n                 \"datetime\": \"2018-11-27T02:53:17.000Z\",\n                 \"content\": \"别为不属于自己的观众，演绎不擅长的人生\",\n     },\n  ],\n  \"message\": \"成功\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "sampleRequest": [
-      {
-        "url": "/diary/moodEssay"
-      }
-    ],
-    "version": "1.1.0",
-    "filename": "routes/diary.js",
-    "groupTitle": "diary"
   },
   {
     "type": "post",
@@ -995,6 +186,520 @@
     "version": "1.0.0",
     "filename": "routes/login.js",
     "groupTitle": "login"
+  },
+  {
+    "type": "post",
+    "url": "/menuManagement/GetAll",
+    "title": "菜单管理查询 分页",
+    "description": "<p>菜单管理查询 分页</p>",
+    "name": "GetAll",
+    "group": "menuManagement",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "moduleParentId",
+            "description": "<p>必填如果是一级就传0其他的填上一级的id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "skipCount",
+            "description": "<p>分页跳过多少条数据</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "maxResultCount",
+            "description": "<p>分页最大获取多少条数据</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "classification",
+            "description": "<p>分类名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "datetime",
+            "optional": false,
+            "field": "datetime",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "parent_int",
+            "description": "<p>父级id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "datetime",
+            "optional": false,
+            "field": "createTime",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "createCode",
+            "description": "<p>创建人</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n         \"status\": 200,\n         \"success\": true,\n         \"result\": [\n         ],\n         \"message\": \"成功\"\n     }",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/menuManagement/GetAll"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/systemManagement/menuManagement.js",
+    "groupTitle": "menuManagement"
+  },
+  {
+    "type": "post",
+    "url": "/menuManagement/GetTree",
+    "title": "菜单管理下拉树",
+    "description": "<p>菜单管理下拉树</p>",
+    "name": "GetTree",
+    "group": "menuManagement",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "moduleParentId",
+            "description": "<p>必填如果是一级就传0其他的填上一级的id</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "classification",
+            "description": "<p>分类名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "datetime",
+            "optional": false,
+            "field": "datetime",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "parent_int",
+            "description": "<p>父级id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "datetime",
+            "optional": false,
+            "field": "createTime",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "createCode",
+            "description": "<p>创建人</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n          \"status\": 200,\n          \"success\": true,\n          \"result\": [\n          ],\n          \"message\": \"成功\"\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/menuManagement/GetTree"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/systemManagement/menuManagement.js",
+    "groupTitle": "menuManagement"
+  },
+  {
+    "type": "get",
+    "url": "/menuManagement/Getitem",
+    "title": "菜单管理查询 通过id查询",
+    "description": "<p>菜单管理查询 通过id查询</p>",
+    "name": "Getitem",
+    "group": "menuManagement",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>必填</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n          \"status\": 200,\n          \"success\": true,\n          \"result\": [\n          ],\n          \"message\": \"成功\"\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/menuManagement/Getitem"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/systemManagement/menuManagement.js",
+    "groupTitle": "menuManagement"
+  },
+  {
+    "type": "post",
+    "url": "/menuManagement/add",
+    "title": "菜单管理新增数据",
+    "description": "<p>菜单管理新增数据</p>",
+    "name": "add",
+    "group": "menuManagement",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "modularCoding",
+            "description": "<p>模块编码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "moduleName",
+            "description": "<p>模块名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "multilingualKey",
+            "description": "<p>多语言Key</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "superiorMenuId",
+            "description": "<p>上级菜单</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "icon",
+            "description": "<p>图标</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "routeAddress",
+            "description": "<p>地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "sort",
+            "description": "<p>排序</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "remarks",
+            "description": "<p>备注</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "classification",
+            "description": "<p>分类名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "datetime",
+            "optional": false,
+            "field": "datetime",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "parent_int",
+            "description": "<p>父级id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "datetime",
+            "optional": false,
+            "field": "createTime",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "createCode",
+            "description": "<p>创建人</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n          \"status\": 200,\n          \"success\": true,\n          \"result\": [\n          ],\n          \"message\": \"成功\"\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/menuManagement/add"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/systemManagement/menuManagement.js",
+    "groupTitle": "menuManagement"
+  },
+  {
+    "type": "post",
+    "url": "/menuManagement/delete",
+    "title": "菜单管理删除数据",
+    "description": "<p>菜单管理删除数据</p>",
+    "name": "delete",
+    "group": "menuManagement",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "optional": false,
+            "field": "ids",
+            "description": "<p>id数组集合</p>"
+          }
+        ]
+      }
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n          \"status\": 200,\n          \"success\": true,\n          \"result\": [\n          ],\n          \"message\": \"成功\"\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/menuManagement/delete"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/systemManagement/menuManagement.js",
+    "groupTitle": "menuManagement"
+  },
+  {
+    "type": "post",
+    "url": "/menuManagement/updateStatus",
+    "title": "菜单管理修改数据启用状态",
+    "description": "<p>菜单管理修改数据启用状态</p>",
+    "name": "updateStatus",
+    "group": "menuManagement",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "optional": false,
+            "field": "moduleList",
+            "description": "<p>模块修改数据的集合</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "参数实例:",
+          "content": "moduleList[\n    {\n        id:1,//id\n        status:1,//状态{1为启用，0为停用}\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>用户授权token</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回格式:",
+          "content": "{\n          \"status\": 200,\n          \"success\": true,\n          \"result\": [\n          ],\n          \"message\": \"成功\"\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/menuManagement/updateStatus"
+      }
+    ],
+    "version": "1.1.0",
+    "filename": "routes/systemManagement/menuManagement.js",
+    "groupTitle": "menuManagement"
   },
   {
     "type": "post",
@@ -1090,7 +795,7 @@
       }
     ],
     "version": "1.1.0",
-    "filename": "routes/users.js",
+    "filename": "routes/userAccount/users.js",
     "groupTitle": "users"
   },
   {
@@ -1159,7 +864,7 @@
       }
     ],
     "version": "1.1.0",
-    "filename": "routes/users.js",
+    "filename": "routes/userAccount/users.js",
     "groupTitle": "users"
   },
   {
@@ -1242,7 +947,7 @@
       }
     ],
     "version": "1.1.0",
-    "filename": "routes/users.js",
+    "filename": "routes/userAccount/users.js",
     "groupTitle": "users"
   },
   {
@@ -1291,7 +996,7 @@
       }
     ],
     "version": "1.1.0",
-    "filename": "routes/users.js",
+    "filename": "routes/userAccount/users.js",
     "groupTitle": "users"
   },
   {
@@ -1340,7 +1045,7 @@
       }
     ],
     "version": "1.1.0",
-    "filename": "routes/users.js",
+    "filename": "routes/userAccount/users.js",
     "groupTitle": "users"
   }
 ]

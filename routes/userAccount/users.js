@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../config/mysql');//引入mysql文件
-var common = require('../config/common');//引入token类文件
+var db = require('../../config/mysql');//引入mysql文件
+var common = require('../../config/common');//引入token类文件
 const Joi = require('joi');//数据模型校验模块  https://www.cnblogs.com/zzbo/p/5906101.html
 var multipart = require('connect-multiparty');// 引入解决post参数接收
 var multipartMiddleware = multipart();//如果全局获取post参数设置没生效，就使用此方法放在路由后面
