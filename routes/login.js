@@ -33,7 +33,7 @@ var multipartMiddleware = multipart();
               "id": 1,
               "img": "/uploadImg/user_img/154563224052635.jpg",
               "usergroup": "超级管理员",
-              "username": "",
+              "username": "",11111
               "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi55Sw5L-d5bmzIiwiaWF0IjoxNTY0NDU2NDc2LCJleHAiOjE1NjQ0OTI0NzZ9.vyqFuZrDeOgPftnLJ-V6RfAkIAtVRkfzo3FIaY2EtvE"
           },
           "message": "成功"
