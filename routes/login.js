@@ -30,7 +30,7 @@ var multipartMiddleware = multipart();
           "success": true,
           "result": {
               "datetime": "2019-05-16T07:29:59.000Z",
-              "id": 1,
+              "id": 0,
               "img": "/uploadImg/user_img/154563224052635.jpg",
               "usergroup": "超级管理员",
               "username": "田保平",
