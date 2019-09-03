@@ -61,7 +61,13 @@ app.use('/menuManagement', menuManagementRouter);
 
 // catch 404 and forward to error handler捕获404错误，并转发到错误处理器。
 app.use(function(req, res, next) {
+  console.log(1)
   next(createError(404));
+});
+// catch 404 and forward to error handler捕获404错误，并转发到错误处理器。
+app.use(function(req, res, next) {
+  console.log(2)
+  next(createError(500));
 });
 // error handler错误处理程序
 app.use(function(err, req, res, next) {

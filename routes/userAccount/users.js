@@ -12,8 +12,8 @@ var multipartMiddleware = multipart();//如果全局获取post参数设置没生
    * @apiDescription  通过文章的id查询到单条详情数据
    * @apiName list
    * @apiGroup users
-   * @apiParam {string} page 第几页 必填
-   * @apiParam {string} pageSize 请求多少条数据 必填
+   * @apiParam {string} skipCount 第几页 必填
+   * @apiParam {string} maxResultCount 请求多少条数据 必填
    * @apiParam {string} content 查询条件
    * @apiParam {string} classification 查询条件
    * @apiHeader {String} Authorization 用户授权token
@@ -38,8 +38,8 @@ var multipartMiddleware = multipart();//如果全局获取post参数设置没生
 router.post('/list', multipartMiddleware,function(req, res, next) {
   common.checkToken(req, res,()=>{//验证token
     const schema = Joi.object().keys({
-      pageSize: Joi.number().required(),
-      page:Joi.number().required(),
+      maxResultCount: Joi.number().required(),
+      skipCount:Joi.number().required(),
       classification:Joi.string().allow(''),
       content:Joi.string().allow(''),
     })
@@ -49,21 +49,20 @@ router.post('/list', multipartMiddleware,function(req, res, next) {
       } else {
       var allDataNun
       // 查询总共有多少条数据
-      db.query("select COUNT(id) from boke_users",function(err,data){
+      if (req.body.content==""||req.body.content==null) {
+        var sql1=`select COUNT(id) from cms_admin_user`
+        var sql=`select id,username,usercode,phone,email,sex,locked,createdTime,createdBy,datetime,permissionType from cms_admin_user order by id desc  limit ${req.body.skipCount},${req.body.maxResultCount}`
+        } else {
+        var sql1=`select COUNT(id) from cms_admin_user where username='${req.body.content}'`
+        var sql=`select id,username,usercode,phone,email,sex,locked,createdTime,createdBy,datetime,permissionType from cms_admin_user where username='${req.body.content}' order by id desc limit ${req.body.skipCount},${req.body.maxResultCount}`
+        }
+      db.query(sql1,function(err,data){
         if(err){
           res.status(500).send(db.errorSendJson(err.sqlMessage))
         }else {
           // console.log(req.query)//获取get参数
           // console.log(req.body)//获取post参数
           allDataNun=data[0]['COUNT(id)']
-          var page=(req.body.page-1)*req.body.pageSize
-          var pageSize=req.body.pageSize
-          var classification=req.body.classification
-          if (classification==""||classification==null) {
-          var sql=`select * from boke_users order by id desc  limit ${page},${pageSize}`
-          } else {
-          var sql=`select * from boke_users where classification='${classification}' limit ${page},${pageSize}`
-          }
           // 查询分页后的数据
           db.query(sql,function(err,data){
             if(err){
@@ -132,7 +131,7 @@ router.post("/addusers",function (req, res, next) {
       } else {
         // 查询总共有多少条数据
         let analysisToken=common.analysisToken(req)
-        db.query(`insert into boke_users(img,password,userCode,usergroup,username,createCode,crateTime) values( '${req.body.img}','${req.body.password}','${req.body.userCode}','${req.body.usergroup}','${req.body.username}','${analysisToken.userCode}','${common.GetDateStr(new Date())}');`,function(err,data){
+        db.query(`insert into cms_admin_user(img,password,userCode,usergroup,username,createCode,crateTime) values( '${req.body.img}','${req.body.password}','${req.body.userCode}','${req.body.usergroup}','${req.body.username}','${analysisToken.userCode}','${common.GetDateStr(new Date())}');`,function(err,data){
           if(err){
             res.status(500).send(db.errorSendJson(err.sqlMessage))
           }else {
@@ -169,7 +168,7 @@ router.post("/addusers",function (req, res, next) {
   }
   router.delete("/deleteusers",function (req, res, next) {
     common.checkToken(req, res,()=>{//验证token
-      db.query(`delete from boke_users where id in(${req.query.id});`,function(err,data){
+      db.query(`delete from cms_admin_user where id in(${req.query.id});`,function(err,data){
         if(err){
           res.status(500).send(db.errorSendJson(err.sqlMessage))  
         }else {
@@ -201,7 +200,7 @@ router.post("/addusers",function (req, res, next) {
    */ 
 }
 router.post('/user_code', function(req, res, next) {
-    db.query(`select * from boke_users where userCode='${req.body.userCode}';`,function(err,data){
+    db.query(`select * from cms_admin_user where userCode='${req.body.userCode}';`,function(err,data){
       console.log(data)
       if(err){
         res.status(500).send(db.errorSendJson(err.sqlMessage))
@@ -239,7 +238,7 @@ router.post('/user_code', function(req, res, next) {
 }
 router.get('/user_pearson_all', function(req, res, next) {
   common.checkToken(req, res,()=>{//验证token
-    db.query("select count(*) from boke_users;",function(err,data){
+    db.query("select count(*) from cms_admin_user;",function(err,data){
       console.log(data)
       if(err){
         res.status(500).send(db.errorSendJson(err.sqlMessage))

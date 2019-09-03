@@ -42,6 +42,7 @@ var multipartMiddleware = multipart();
    * @apiVersion 1.0.0
    */
 router.post('/',multipartMiddleware, function(req, res, next) {
+    var start = new Date();
     // 必填校验模型
       const schema = Joi.object().keys({
         userCode: Joi.string().required(),
@@ -62,6 +63,7 @@ router.post('/',multipartMiddleware, function(req, res, next) {
         }else {
           if (data.length>0) {
             if (data[0].locked==0) {//状态正常
+              let date=common.GetDateStr(new Date())
               let token=common.generateToken({username:data[0].username,userCode:data[0].userCode,permissionType:data[0].permissionType})//获取token
               let datas={
                 username:data[0].username,
@@ -71,13 +73,20 @@ router.post('/',multipartMiddleware, function(req, res, next) {
                 email:data[0].email,
                 sex:data[0].sex,
                 locked:data[0].locked,
-                datetime:data[0].datetime,
+                datetime:data[0].date,
                 id:data[0].id,
                 permissionType:data[0].permissionType,
                 token:"Bearer "+token
               }
-              db.query(`update boke_users set datetime='${common.GetDateStr(new Date())}' where id=${data[0].id}`);
-              res.send(db.sendJson(datas))
+                  // 添加登录记录及更新最新登陆时间
+                    let insert=`insert into cms_admin_log(description,userCode,start_time,spend_time,base_path,url,method,user_id,ip) 
+                    values( '登录系统','${data[0].usercode}','${date}','${new Date() - req._startTime+ 'ms'}','${req.baseUrl}','${req.url}','
+                    ${req.method}','${data[0].id}','${req.ip}');`
+                    db.query(insert)
+                    db.query(`update boke_users set datetime='${date}' where id=${data[0].id}`);
+                  // 添加登录记录及更新最新登陆时间
+                  res.send(db.sendJson(datas))
+              
             } else {
               next(db.errorSendJson("当前账号已被停用！"))
             }

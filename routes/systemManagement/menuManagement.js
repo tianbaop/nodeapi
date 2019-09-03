@@ -50,11 +50,11 @@ router.post('/GetAll', function(req, res, next) {
             }else {
                 allDataNun=COUNT[0]['COUNT(id)']
                 if (req.body.moduleId) {
-                    var sql=`select * from cms_MenuManagement where superiorMenuId='${req.body.moduleId}' or id='${req.body.moduleId}' limit ${req.body.skipCount},${req.body.maxResultCount};`
+                    var sql=`select * from cms_MenuManagement where superiorMenuId='${req.body.moduleId}' or id='${req.body.moduleId}' order by id desc limit ${req.body.skipCount},${req.body.maxResultCount};`
                 } else if (req.body.moduleName) {
-                    var sql=`select * from cms_MenuManagement where moduleName='${req.body.moduleName}' limit ${req.body.skipCount},${req.body.maxResultCount};`  
+                    var sql=`select * from cms_MenuManagement where moduleName='${req.body.moduleName}' order by id desc limit ${req.body.skipCount},${req.body.maxResultCount};`  
                 } else {
-                    var sql=`select * from cms_MenuManagement limit ${req.body.skipCount},${req.body.maxResultCount};`                
+                    var sql=`select * from cms_MenuManagement order by id desc limit ${req.body.skipCount},${req.body.maxResultCount};`                
                 }
                 db.query(sql,(err,data)=>{
                     if(err){
